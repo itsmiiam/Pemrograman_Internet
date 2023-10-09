@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mia Amalia (2200319)</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=button] {
+            background-color: #aa7804;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        input[type=button]:hover {
+            background-color: #aa7804;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            .col-25,
+            .col-75,
+            input[type=button] {
+                width: 100%;
+                margin-top: 0;
+            }
+        }
+    </style>
+    <script>
+        function tampilHasil() {
+            var nama = document.getElementById("nama").value;
+            var alamat = document.getElementById("alamatPemesan").value;
+            var jenisKopi = document.getElementById("jenisKopi").value;
+            var ukuran = document.querySelector('input[name="ukuran"]:checked');
+            var hasilElement = document.getElementById("hasil");
+
+            var hargaKopi = 0;
+
+            switch (jenisKopi) {
+                case "Kopi Arabika":
+                    hargaKopi = 10000;
+                    break;
+                case "Kopi Robusta":
+                    hargaKopi = 15000;
+                    break;
+                case "Kopi Liberika":
+                    hargaKopi = 20000;
+                    break;
+                case "Kopi Ekselsa":
+                    hargaKopi = 25000;
+                    break;
+                default:
+                    hargaKopi = 0;
+                    break;
+            }
+
+            var hargaUkuran = 0;
+
+            if (ukuran.value === "Sedang") {
+                hargaUkuran = 2500;
+            } else if (ukuran.value === "Besar") {
+                hargaUkuran = 5000;
+            }
+
+            var totalHarga = hargaKopi + hargaUkuran;
+
+            hasilElement.innerHTML =
+                "Nama : " + nama + "<br>" +
+                "Alamat : " + alamat + "<br>" +
+                "Pesanan Jenis Kopi : " + jenisKopi + "<br>" +
+                "Ukuran : " + ukuran.value + "<br>" +
+                "Total : Rp " + totalHarga.toLocaleString();
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>Form Pemesanan Coffee</h2>
+
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-25">
+                    <label for="nama">Nama Lengkap Pemesan</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="nama" name="nama" placeholder="Masukan Nama Anda ...">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="jenisKopi">Pilih Jenis Kopi</label>
+                </div>
+                <div class="col-75">
+                    <select id="jenisKopi" name="jenisKopi">
+                        <option value="Kopi Arabika">Kopi Arabika</option>
+                        <option value="Kopi Robusta">Kopi Robusta</option>
+                        <option value="Kopi Liberika">Kopi Liberika</option>
+                        <option value="Kopi Ekselsa">Kopi Ekselsa</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="alamatPemesan">Alamat Pemesan</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="alamatPemesan" name="alamatPemesan" placeholder="Alamat Pemesan.."
+                        style="height:200px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="ukuran">Ukuran</label>
+                </div>
+                <div class="col-25">
+                    <input type="radio" id="sedang" name="ukuran" value="Sedang">
+                      <label for="sedang">Sedang</label><br>
+                </div>
+                <div class="col-25">
+                    <input type="radio" id="besar" name="ukuran" value="Besar">
+                      <label for="besar">Besar</label><br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <input type="button" onClick="tampilHasil()" value="Simpan">
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-100">
+            <p id="hasil" name="hasil"></p>
+        </div>
+    </div>
+
+</body>
+
+</html>
